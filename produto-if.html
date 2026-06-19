@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>O IF Infinito™ — Gambiarra Hub</title>
+  <link rel="stylesheet" href="css/estilo.css" />
+  <style>
+    .produto-detalhe { display: flex; gap: 32px; flex-wrap: wrap; margin-top: 20px; align-items: flex-start;}
+    .produto-img { width: 120px; height: 120px; background: var(--dark-card); border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; font-size: 4rem; border-radius: 8px; flex-shrink: 0; }
+    .produto-info { flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 16px; }
+    .preco { font-family: 'Space Mono', monospace; font-size: 2rem; color: var(--neon-blue); }
+    
+    /* O SEU CSS DO IF INFINITO */
+    .codigo-bloco { background: #060608; padding: 20px; font-family: 'Space Mono', monospace; font-size: 0.8rem; color: #e8e8f0; border: 1px solid rgba(255,255,255,0.05); border-radius: 4px; line-height: 1.6; white-space: pre-wrap; margin-top: 16px;}
+    .codigo-keyword { color: var(--neon-blue); font-weight: bold; }
+    .codigo-string { color: #4ade80; }
+    .codigo-func { color: #c084fc; }
+    .codigo-comentario { color: #5a5a6e; font-style: italic; }
+    .display-contador { background: #0c0c11; border: 1px solid var(--border-subtle); padding: 24px; text-align: center; margin-bottom: 24px; border-radius: 4px; transition: 0.3s; }
+    .display-contador.ativo { border-color: #ef4444; box-shadow: 0 0 15px rgba(239, 68, 68, 0.2); }
+    .num-blocos { font-family: 'Bebas Neue', cursive; font-size: 4rem; color: var(--neon-blue); line-height: 1; margin-bottom: 8px;}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-topo"><a href="index.html" class="logo"><div class="logo-texto"><span class="logo-nome">Gambiarra <span>Hub</span></span></div></a><button class="badge-carrinho">[ CART ] <span class="badge-num" id="badge-carrinho">0</span></button></div>
+    <nav><ul class="nav-lista"><li><a href="index.html">Início</a></li><li><a href="catalogo.html" class="ativo">Catálogo</a></li><li><a href="formulario.html">Simulador de Risco</a></li></ul></nav>
+  </header>
+
+  <main>
+    <section class="secao">
+      <div class="breadcrumb" style="margin-bottom: 24px; font-family: 'Space Mono', monospace; font-size: 0.8rem;"><a href="catalogo.html" style="color: var(--neon-blue);">← VOLTAR AO CATÁLOGO</a></div>
+
+      <div class="produto-detalhe">
+        <div class="produto-img">🔀</div>
+        <div class="produto-info">
+          <span class="card-badge" style="width: fit-content;">LÓGICA</span>
+          <h1 style="font-family: 'Bebas Neue', cursive; font-size: 3rem; line-height: 1;">O IF Infinito™</h1>
+          <p style="color: var(--text-muted); line-height: 1.6;">Estrutura de decisão encadeada com mais de 500 linhas de lógica questionável. Cobre todos os casos de uso imagináveis e alguns impossíveis. Não tente entender. Apenas copie.</p>
+          <div class="preco">R$ 42,00</div>
+          <button class="btn btn-primario btn-adicionar-carrinho" data-nome="O IF Infinito™" style="max-width: 300px; padding: 16px;">ADICIONAR AO CARRINHO</button>
+        </div>
+      </div>
+
+      <div class="area-interativa" style="margin-top: 40px;">
+        <h3 style="color: var(--neon-blue); font-family: 'Space Mono'; margin-bottom: 24px;">// LABORATÓRIO DE LÓGICA</h3>
+        
+        <div class="display-contador" id="display-contador">
+          <div class="num-blocos" id="num-blocos">2</div>
+          <p id="texto-desespero" style="font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--text-muted);">Seu código tem <strong>2 blocos de decisão</strong> encadeados. Nível de desespero: <strong style="color:#4ade80;">Calmo</strong></p>
+        </div>
+
+        <div style="display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap;">
+          <button class="btn btn-primario" id="btn-adicionar">➕ Adicionar mais um else if</button>
+          <button class="btn btn-secundario" id="btn-testar" style="border-color: #ef4444; color: #ef4444;">⚠️ Testar em Produção</button>
+        </div>
+
+        <div class="codigo-bloco" id="bloco-codigo"><span class="codigo-comentario">// Sistema de decisão v1.0 — código autoral</span>
+<span class="codigo-keyword">if</span> (usuario === <span class="codigo-string">"admin"</span>) {
+  <span class="codigo-func">redirecionar</span>(<span class="codigo-string">"/dashboard"</span>);
+} <span class="codigo-keyword">else if</span> (usuario === <span class="codigo-string">"user"</span>) {
+  <span class="codigo-func">redirecionar</span>(<span class="codigo-string">"/home"</span>);
+} <span class="codigo-keyword">else</span> {
+  <span class="codigo-func">alert</span>(<span class="codigo-string">"Quem é você?"</span>);
+}</div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-carrinho" id="modal-carrinho"><div class="modal-header"><h3>[ CART_TERMINAL ]</h3><button class="btn-fechar-modal" id="fechar-carrinho">CLOSE (X)</button></div><div class="carrinho-itens" id="carrinho-itens-lista"></div><div class="modal-footer"><div class="carrinho-total"><span>TOTAL:</span><span id="carrinho-total-valor">R$ 0,00</span></div><button class="btn btn-primario" id="btn-pagar-fake" style="width: 100%;">PAY_NOW</button></div></div>
+  
+  <script src="js/principal.js"></script>
+  <script>
+    let blocosIf = 2;
+    document.getElementById('btn-adicionar').addEventListener('click', () => {
+      blocosIf++;
+      const blocoCodigo = document.getElementById('bloco-codigo');
+      const numBlocos = document.getElementById('num-blocos');
+      const textoDesespero = document.getElementById('texto-desespero');
+      const display = document.getElementById('display-contador');
+
+      numBlocos.textContent = blocosIf;
+      
+      const novoBloco = `\n} <span class="codigo-keyword">else if</span> (condicao_${blocosIf} === <span class="codigo-string">true</span>) {\n  <span class="codigo-comentario">// Talvez entre aqui, não tenho certeza</span>\n  <span class="codigo-func">fazerAlgo</span>();`;
+      blocoCodigo.innerHTML = blocoCodigo.innerHTML.replace('} <span class="codigo-keyword">else</span> {', novoBloco + '\n} <span class="codigo-keyword">else</span> {');
+
+      if (blocosIf < 5) {
+        textoDesespero.innerHTML = `Seu código tem <strong>${blocosIf} blocos</strong>. Nível de desespero: <strong style="color:#4ade80;">Aceitável</strong>`;
+      } else if (blocosIf < 10) {
+        textoDesespero.innerHTML = `Seu código tem <strong>${blocosIf} blocos</strong>. Nível de desespero: <strong style="color:#facc15;">Preocupante</strong>`;
+        display.classList.add('ativo');
+        display.style.borderColor = '#facc15';
+      } else if (blocosIf < 15) {
+        textoDesespero.innerHTML = `Seu código tem <strong>${blocosIf} blocos</strong>. Nível de desespero: <strong style="color:#ef4444;">Caótico</strong>`;
+        display.style.borderColor = '#ef4444';
+        numBlocos.style.color = '#ef4444';
+        document.getElementById('btn-adicionar').textContent = '⚠️ POR FAVOR, PARE';
+      } else {
+        textoDesespero.innerHTML = `Seu código tem <strong>${blocosIf} blocos</strong>. Nível de desespero: <strong>Deus nos acuda</strong>`;
+        document.getElementById('btn-adicionar').textContent = '💀 ABANDONAR PROJETO';
+      }
+    });
+
+    document.getElementById('btn-testar').addEventListener('click', () => {
+      alert("Aviso: Enviando 5.000 requisições simultâneas para o servidor de produção...");
+      alert(`A verificação travou no Else If número ${Math.floor(Math.random() * blocosIf) + 1}.`);
+      alert("O navegador não está respondendo.");
+      location.reload();
+    });
+  </script>
+</body>
+</html>

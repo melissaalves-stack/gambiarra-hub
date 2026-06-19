@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Console.log Premium — Gambiarra Hub</title>
+  <link rel="stylesheet" href="css/estilo.css" />
+  <style>
+    .produto-detalhe { display: flex; gap: 40px; flex-wrap: wrap; margin-top: 20px; }
+    .produto-img { flex: 1; min-width: 300px; background: var(--dark-card); border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; font-size: 6rem; border-radius: 4px; min-height: 400px; }
+    .produto-info { flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 16px; }
+    .preco { font-family: 'Space Mono', monospace; font-size: 2.5rem; color: var(--neon-blue); }
+    .features-lista { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+    .features-lista li { color: var(--text-muted); font-size: 0.9rem; display: flex; align-items: center; gap: 8px; }
+    .features-lista li::before { content: '>'; color: var(--neon-blue); font-family: 'Space Mono', monospace; }
+    
+    /* Estilos da Demonstração */
+    .demonstracao { background: #0d1117; padding: 20px; border-radius: 8px; border: 1px solid var(--border-subtle); margin-top: 40px; }
+    .demo-header { display: flex; gap: 8px; margin-bottom: 20px; }
+    .demo-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .demo-painel { display: flex; gap: 20px; flex-wrap: wrap; }
+    .demo-codigo { flex: 1; min-width: 300px; overflow-x: auto; font-family: 'Space Mono', monospace; font-size: 0.9rem; color: #c9d1d9; line-height: 1.5; }
+    .demo-interacao { flex: 1; min-width: 300px; background: #000; padding: 20px; border-radius: 4px; border: 1px solid #30363d; display: flex; flex-direction: column; gap: 16px; }
+    .terminal-output { flex-grow: 1; font-family: 'Space Mono', monospace; font-size: 0.85rem; overflow-y: auto; max-height: 180px; white-space: pre-wrap; }
+    .log-info { color: #c9d1d9; } .log-warn { color: #facc15; } .log-error { color: #ef4444; }
+    .btn-demo { padding: 8px 16px; font-family: 'Space Mono', monospace; cursor: pointer; border: none; border-radius: 4px; font-weight: bold; background: #3b82f6; color: #fff; }
+    .btn-demo:disabled { background: #1e3a8a; color: #888; cursor: not-allowed; }
+    .syntax-keyword { color: #ff7b72; } .syntax-string { color: #a5d6ff; } .syntax-comment { color: #8b949e; font-style: italic; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-topo">
+      <a href="index.html" class="logo"><div class="logo-texto"><span class="logo-nome">Gambiarra <span>Hub</span></span></div></a>
+      <button class="badge-carrinho">[ CART ] <span class="badge-num" id="badge-carrinho">0</span></button>
+    </div>
+    <nav><ul class="nav-lista"><li><a href="index.html">Início</a></li><li><a href="catalogo.html" class="ativo">Catálogo</a></li><li><a href="formulario.html">Simulador de Risco</a></li><li><a href="sobre.html">Quem Somos</a></li></ul></nav>
+  </header>
+
+  <main>
+    <section class="secao">
+      <div class="breadcrumb" style="margin-bottom: 24px; font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--text-muted);">
+        <a href="catalogo.html" style="color: var(--neon-blue); text-decoration: none;">&lt; VOLTAR AO CATÁLOGO</a>
+      </div>
+
+      <div class="produto-detalhe">
+        <div class="produto-img">📟</div>
+        <div class="produto-info">
+          <h1 style="font-family: 'Bebas Neue', cursive; font-size: 3.5rem; line-height: 1; color: var(--text-main);">Console.log Premium™</h1>
+          <p style="color: var(--text-muted); line-height: 1.6;">
+            Mostra na prática porque encher seu código de <code style="color: #4ade80;">console.log("aqui 1")</code> cria um lixo digital no navegador do cliente que torna impossível debugar de verdade.
+          </p>
+          <div class="preco">R$ 5,00</div>
+          <ul class="features-lista">
+            <li>Polui o terminal de produção maravilhosamente</li>
+            <li>Mensagens passivo-agressivas para o próximo dev</li>
+            <li>Substitui o uso saudável de breakpoints</li>
+          </ul>
+          <div style="margin-top: 24px; display: flex; gap: 16px;">
+            <button class="btn btn-primario btn-adicionar-carrinho" data-nome="Console.log Premium™" style="flex: 1; font-size: 1.2rem; padding: 16px;">ADICIONAR AO CARRINHO</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- DEMONSTRAÇÃO INTERATIVA -->
+      <div class="demonstracao">
+        <div class="demo-header">
+          <span class="demo-dot" style="background: #ef4444;"></span>
+          <span class="demo-dot" style="background: #facc15;"></span>
+          <span class="demo-dot" style="background: #22c55e;"></span>
+          <span style="color: var(--text-muted); font-family: 'Space Mono', monospace; font-size: 0.8rem; margin-left: 10px;">debug_cego.js</span>
+        </div>
+        
+        <div class="demo-painel">
+          <div class="demo-codigo">
+<pre><code><span class="syntax-keyword">function</span> processarPagamento() {
+  console.log(<span class="syntax-string">"entrou"</span>);
+  console.log(<span class="syntax-string">"aqui 1"</span>);
+  
+  <span class="syntax-keyword">let</span> user = buscarUser();
+  console.log(<span class="syntax-string">"user é:"</span>, user); <span class="syntax-comment">// loga object Object</span>
+  
+  <span class="syntax-keyword">if</span> (!user.id) {
+    console.log(<span class="syntax-string">"WTF PQ TÁ NULO DEUS DO CEU"</span>);
+  }
+  
+  console.log(<span class="syntax-string">"chegou no fim?"</span>);
+}</code></pre>
+          </div>
+          
+          <div class="demo-interacao">
+            <button id="btn-run-logs" class="btn-demo">Executar processarPagamento()</button>
+            <div class="terminal-output" id="log-terminal">
+<span style="color: #6e7681;">> Aguardando execução do código espaguete...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/principal.js"></script>
+  <script>
+    const btnRun = document.getElementById('btn-run-logs');
+    const term = document.getElementById('log-terminal');
+    const logs = [
+      { t: "info", m: "entrou" },
+      { t: "info", m: "aqui 1" },
+      { t: "info", m: "aqui 2" },
+      { t: "info", m: "user é: [object Object]" },
+      { t: "info", m: "teste" },
+      { t: "warn", m: "Aviso: variável não declarada na linha 42" },
+      { t: "error", m: "WTF PQ TÁ NULO DEUS DO CEU" },
+      { t: "info", m: "chegou no fim?" },
+      { t: "error", m: "Uncaught TypeError: Cannot read properties of undefined" }
+    ];
+
+    btnRun.addEventListener('click', () => {
+      btnRun.disabled = true;
+      term.innerHTML = "<span style='color: #6e7681;'>> Executando...</span><br>";
+      let i = 0;
+      
+      const int = setInterval(() => {
+        if(i < logs.length) {
+          const l = logs[i];
+          let cssClass = l.t === 'error' ? 'log-error' : (l.t === 'warn' ? 'log-warn' : 'log-info');
+          term.innerHTML += `<span class="${cssClass}">[app.js:${10 + i * 2}] ${l.m}</span><br>`;
+          term.scrollTop = term.scrollHeight;
+          i++;
+        } else {
+          clearInterval(int);
+          btnRun.disabled = false;
+        }
+      }, 400);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Fantasma™ — Gambiarra Hub</title>
+  <link rel="stylesheet" href="css/estilo.css" />
+  <style>
+    .produto-detalhe { display: flex; gap: 32px; flex-wrap: wrap; margin-top: 20px; align-items: flex-start; }
+    .produto-img { width: 120px; height: 120px; background: var(--dark-card); border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; font-size: 4rem; border-radius: 8px; flex-shrink: 0; }
+    .produto-info { flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 16px; }
+    .preco { font-family: 'Space Mono', monospace; font-size: 2rem; color: var(--neon-blue); }
+    
+    /* O SEU CSS DO JS FANTASMA */
+    .fantasma-container { position: relative; background: #0c0c11; border: 1px solid rgba(0, 194, 255, 0.15); border-radius: 8px; padding: 24px; overflow: hidden; margin-top: 24px; }
+    .aviso-classified { background: rgba(239, 68, 68, 0.1); border-left: 4px solid #ef4444; padding: 16px; font-size: 0.85rem; margin-bottom: 16px; }
+    .aviso-classified strong { color: #ef4444; display: block; margin-bottom: 4px; font-family: 'Space Mono', monospace; }
+    .codigo-secreto { display: none; background: #060608; border: 1px solid rgba(255,255,255,0.05); padding: 16px; font-family: 'Space Mono', monospace; font-size: 0.8rem; color: #e8e8f0; line-height: 1.6; }
+    .codigo-comentario { color: #5a5a6e; font-style: italic; }
+    .codigo-keyword { color: var(--neon-blue); }
+    .codigo-string { color: #4ade80; }
+    .terminal-log { background: #060608; border: 1px solid rgba(255,255,255,0.05); border-radius: 4px; padding: 16px; font-family: 'Space Mono', monospace; font-size: 0.75rem; max-height: 180px; overflow-y: auto; margin-top: 16px; }
+    .log-linha { display: block; margin-bottom: 4px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-topo"><a href="index.html" class="logo"><div class="logo-texto"><span class="logo-nome">Gambiarra <span>Hub</span></span></div></a><button class="badge-carrinho">[ CART ] <span class="badge-num" id="badge-carrinho">0</span></button></div>
+    <nav><ul class="nav-lista"><li><a href="index.html">Início</a></li><li><a href="catalogo.html" class="ativo">Catálogo</a></li><li><a href="formulario.html">Simulador de Risco</a></li></ul></nav>
+  </header>
+
+  <main>
+    <section class="secao">
+      <div class="breadcrumb" style="margin-bottom: 24px; font-family: 'Space Mono', monospace; font-size: 0.8rem;"><a href="catalogo.html" style="color: var(--neon-blue);">← VOLTAR AO CATÁLOGO</a></div>
+
+      <div class="produto-detalhe">
+        <div class="produto-img">👻</div>
+        <div class="produto-info">
+          <span class="card-badge" style="width: fit-content;">MISTERIOSO</span>
+          <h1 style="font-family: 'Bebas Neue', cursive; font-size: 3rem; line-height: 1;">JavaScript Fantasma™</h1>
+          <p style="color: var(--text-muted); line-height: 1.6;">Aquele arquivo <code style="color:var(--neon-blue);">script.js</code> que ninguém sabe de onde veio. Está comentado. Não foi você que fez. Talvez tenha sido o estagiário de 2019. Se apagar, o site quebra. Se deixar, pode quebrar também.</p>
+          <div class="preco">R$ 13,37</div>
+          <button class="btn btn-primario btn-adicionar-carrinho" data-nome="JavaScript Fantasma™" style="max-width: 300px; padding: 16px;">ADICIONAR AO CARRINHO</button>
+        </div>
+      </div>
+
+      <div class="fantasma-container">
+        <h3 style="color: var(--neon-blue); font-family: 'Space Mono'; margin-bottom: 16px;">// CENTRAL DE INSPEÇÃO PARANORMAL</h3>
+        
+        <div class="aviso-classified">
+          <strong>⚠️ Aviso de Segurança — Nível Máximo</strong>
+          Esta linha de código está comentada por segurança. O dev original disse "não mexe nisso aí" e nunca mais foi visto. Todos os que tentaram entender o código relataram pesadelos recorrentes com ponto-e-vírgula.
+        </div>
+
+        <div style="background:#121217; padding:8px 16px; font-family:'Space Mono'; font-size:0.75rem; color:#5a5a6e; display:flex; justify-content:space-between;">
+          <span>script-fantasma.js — COMENTADO</span><span>█████ CENSURADO █████</span>
+        </div>
+
+        <div class="codigo-secreto" id="codigo-secreto">
+<span class="codigo-comentario">// ============================================</span>
+<span class="codigo-comentario">// SCRIPT FANTASMA v?.?.? — AUTORIA DESCONHECIDA</span>
+<span class="codigo-comentario">// NÃO REMOVA. NÃO MODIFIQUE. NÃO OLHE MUITO.</span>
+<span class="codigo-comentario">// ============================================</span>
+
+<span class="codigo-keyword">function</span> naoMexeAqui() {
+  <span class="codigo-keyword">const</span> coisa = document.querySelector(<span class="codigo-string">"#nao-sei-o-que-e"</span>);
+  <span class="codigo-keyword">if</span> (coisa) {
+    coisa.addEventListener(<span class="codigo-string">"click"</span>, () => {
+      <span class="codigo-comentario">// faz alguma coisa importante aqui</span>
+      setTimeout(() => {
+        window.dadosMagicos = JSON.parse(atob(<span class="codigo-string">"aXNzb25hb2Z1bmNpb25a"</span>));
+      }, 3000);
+    });
+  }
+}
+<span class="codigo-comentario">// Isso foi chamado em algum momento. Talvez ainda seja.</span>
+naoMexeAqui();
+<span class="codigo-comentario">// PS: Se remover essa linha, o menu some. Não sei por quê.</span>
+<span class="codigo-keyword">var</span> _ = <span class="codigo-keyword">true</span>;
+        </div>
+
+        <div style="display:flex; gap:12px; margin-top:16px; flex-wrap: wrap;">
+          <button class="btn btn-secundario" id="btn-inspecionar" onclick="toggleCodigo()">🔍 Inspecionar Código Secreto</button>
+          <button class="btn btn-secundario" style="border-color: #ef4444; color: #ef4444;" onclick="alerteSusto()" id="btn-rodar">▶️ Tentar Executar o Código</button>
+        </div>
+
+        <div class="terminal-log" id="terminal">
+          <span class="log-linha" style="color:#5a5a6e;">> Inicializando inspetor paranormal...</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-carrinho" id="modal-carrinho"><div class="modal-header"><h3>[ CART_TERMINAL ]</h3><button class="btn-fechar-modal" id="fechar-carrinho">CLOSE (X)</button></div><div class="carrinho-itens" id="carrinho-itens-lista"></div><div class="modal-footer"><div class="carrinho-total"><span>TOTAL:</span><span id="carrinho-total-valor">R$ 0,00</span></div><button class="btn btn-primario" id="btn-pagar-fake" style="width: 100%;">PAY_NOW</button></div></div>
+  
+  <script src="js/principal.js"></script>
+  <script>
+    let codigoVisivel = false;
+    let tentativasExecucao = 0;
+
+    function toggleCodigo() {
+      const codigo = document.getElementById('codigo-secreto');
+      const btn = document.getElementById('btn-inspecionar');
+      codigoVisivel = !codigoVisivel;
+      
+      if (codigoVisivel) {
+        codigo.style.display = 'block';
+        btn.textContent = '🙈 Ocultar Código (melhor assim)';
+        adicionarLogTerminal('ACESSO CONCEDIDO — código revelado', '#ef4444');
+        setTimeout(() => adicionarLogTerminal('var _ = true; // isso sustenta o menu?!', '#c084fc'), 600);
+      } else {
+        codigo.style.display = 'none';
+        btn.textContent = '🔍 Inspecionar Código Secreto';
+        adicionarLogTerminal('Código ocultado. Fingindo que não vi nada.', '#4ade80');
+      }
+    }
+
+    function alerteSusto() {
+      tentativasExecucao++;
+      const btn = document.getElementById('btn-rodar');
+      adicionarLogTerminal(`Tentativa de execução #${tentativasExecucao}...`, '#facc15');
+
+      setTimeout(() => {
+        if (tentativasExecucao === 1) {
+          adicionarLogTerminal('Erro: naoMexeAqui is not defined (ou é?)', '#ef4444');
+          alert('❌ Erro no Servidor\\n\\nCódigo: FANTASMA_001\\nMensagem: Ninguém sabe o que aconteceu\\n\\n(Isso era para acontecer. É uma feature.)');
+        } else if (tentativasExecucao === 2) {
+          adicionarLogTerminal('TypeError: window.dadosMagicos is undefined', '#ef4444');
+          alert('💀 Erro Crítico\\n\\nO código rodou.\\nNão sabemos o que ele fez.\\nRecomendamos não fazer nada por 3 dias.');
+        } else {
+          btn.textContent = `▶️ Tentar de Novo (${tentativasExecucao}x e contando)`;
+          alert(`🤡 Tentativa #${tentativasExecucao}\\n\\nO código não faz nada diferente.\\nMas você continua tentando.\\nIsso é o espírito gambiarreiro.`);
+        }
+      }, 800);
+    }
+
+    function adicionarLogTerminal(texto, cor = '#5a5a6e') {
+      const terminal = document.getElementById('terminal');
+      terminal.innerHTML += `<span class="log-linha" style="color:${cor};">> ${texto}</span>`;
+      terminal.scrollTop = terminal.scrollHeight;
+    }
+  </script>
+</body>
+</html>

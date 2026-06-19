@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simulador de Risco — Gambiarra Hub</title>
+  <link rel="stylesheet" href="css/estilo.css" />
+  <style>
+    .alerta { background: var(--dark-card); border-left: 4px solid var(--neon-blue); padding: 16px 20px; color: var(--text-main); font-size: 0.9rem; margin-bottom: 24px; }
+    .form-erro { display: none; color: #ef4444; font-family: 'Space Mono', monospace; font-size: 0.75rem; margin-top: 8px; }
+    select { width: 100%; background: var(--dark-input); border: 1px solid rgba(255, 255, 255, 0.05); padding: 14px; color: #fff; font-family: inherit; font-size: 0.9rem; outline: none; margin-bottom: 8px;}
+    select:focus { border-color: var(--neon-blue); }
+    .resultado-form { background: var(--dark-card); border: 1px solid var(--border-subtle); padding: 32px; border-radius: 4px; text-align: center; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-topo">
+      <a href="index.html" class="logo"><div class="logo-texto"><span class="logo-nome">Gambiarra <span>Hub</span></span></div></a>
+      <button class="badge-carrinho">[ CART ] <span class="badge-num" id="badge-carrinho">0</span></button>
+    </div>
+    <nav><ul class="nav-lista"><li><a href="index.html">Início</a></li><li><a href="catalogo.html">Catálogo</a></li><li><a href="formulario.html" class="ativo">Simulador de Risco</a></li><li><a href="sobre.html">Quem Somos</a></li></ul></nav>
+  </header>
+
+  <main>
+    <section class="hero" style="padding: 60px 8% 40px !important;">
+      <span class="hero-badge">Ferramenta de Diagnóstico Oficial</span>
+      <h1>Simulador de Risco de <span class="destaque">Vergonha™</span></h1>
+      <p class="hero-slogan">Descubra em menos de 2 minutos se seu projeto vai explodir na frente do professor. Algoritmo desenvolvido com anos de trauma acadêmico e muita cafeína.</p>
+    </section>
+
+    <section class="secao">
+      <div class="form-container">
+        
+        <div class="alerta">
+          <strong style="color: var(--neon-blue); font-family: 'Space Mono', monospace;">[ AVISO LEGAL ]</strong> Este simulador não se responsabiliza por nota baixa, choro em banheiro de faculdade ou perda de cabelo provocada pelo prazo de entrega.
+        </div>
+
+        <form id="formulario-risco" novalidate>
+          
+          <div class="form-grupo">
+            <label for="nome-aluno">1. Seu nome completo (para o relatório de vergonha)</label>
+            <input type="text" id="nome-aluno" placeholder="Ex: Fulano da Silva (o que apagou o projeto na hora errada)" />
+            <div class="form-erro" id="erro-nome">> ERRO: Informe seu nome. O sistema precisa saber a quem culpar.</div>
+          </div>
+
+          <div class="form-grupo">
+            <label for="nome-materia">2. Nome da matéria (para calcular o nível de complexidade do desastre)</label>
+            <input type="text" id="nome-materia" placeholder="Ex: Introdução à Programação Web" />
+            <div class="form-erro" id="erro-materia">> ERRO: Informe a matéria. Diferentes disciplinas têm diferentes escalas de catástrofe.</div>
+          </div>
+
+          <div class="form-grupo">
+            <label>3. Qual é o humor atual do seu professor?</label>
+            <div class="radio-grupo">
+              <label class="radio-item"><input type="radio" name="humor-professor" value="bonzinho" /> Bonzinho — ele elogia qualquer coisa e diz "que criativo!"</label>
+              <label class="radio-item"><input type="radio" name="humor-professor" value="rigido" /> Rígido — ele leu todos os artigos sobre boas práticas e vai citar todos</label>
+              <label class="radio-item"><input type="radio" name="humor-professor" value="cafe" /> Humor Baseado em Café — imprevisível, depende de quantos copos tomou</label>
+            </div>
+            <div class="form-erro" id="erro-humor">> ERRO: Selecione o humor do professor. É dado essencial para o cálculo.</div>
+          </div>
+
+          <div class="form-grupo">
+            <label for="erros-console">4. Quantos erros estão aparecendo no console agora?</label>
+            <select id="erros-console" name="erros-console">
+              <option value="">-- Selecione com coragem --</option>
+              <option value="0">0 erros — Mentira ou milagre</option>
+              <option value="1-5">1 a 5 erros — Situação controlada (relativa)</option>
+              <option value="6-20">6 a 20 erros — Preocupante, mas gerenciável</option>
+              <option value="21-50">21 a 50 erros — Em colapso silencioso</option>
+              <option value="50+">50+ erros — O console desistiu de contar</option>
+              <option value="naosei">Não abri o console — Adoro viver no perigo</option>
+            </select>
+            <div class="form-erro" id="erro-console">> ERRO: Selecione a quantidade de erros. Negação não é estratégia.</div>
+          </div>
+
+          <div class="form-grupo">
+            <label>5. Marque todas as situações que se aplicam ao seu projeto:</label>
+            <div class="radio-grupo" style="gap: 12px;">
+              <label class="radio-item" style="justify-content: flex-start;"><input type="checkbox" name="situacoes" value="id-duplicado" /> Uso de IDs duplicados (o clássico copy-paste traidor)</label>
+              <label class="radio-item" style="justify-content: flex-start;"><input type="checkbox" name="situacoes" value="so-important" /> Meu CSS só tem !important</label>
+              <label class="radio-item" style="justify-content: flex-start;"><input type="checkbox" name="situacoes" value="sem-relatorio" /> Não fiz o relatório ainda (o prazo é amanhã)</label>
+              <label class="radio-item" style="justify-content: flex-start;"><input type="checkbox" name="situacoes" value="sem-git" /> Controle de versão = copiar pasta e renomear para "final_v2_ESSE"</label>
+              <label class="radio-item" style="justify-content: flex-start;"><input type="checkbox" name="situacoes" value="so-na-minha-maquina" /> Funciona só na minha máquina (e só no Chrome, e só às 3am)</label>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:16px; margin-top: 24px;">
+            <button type="submit" class="btn btn-primario" style="flex:1;">CALCULAR ÍNDICE DE VERGONHA</button>
+            <button type="button" class="btn btn-secundario" onclick="resetarFormulario()">RECOMEÇAR</button>
+          </div>
+        </form>
+
+        <div class="resultado-form" id="resultado-vergonha" style="display: none; margin-top: 40px;">
+          <h3 id="resultado-titulo" style="font-family:'Bebas Neue', cursive; font-size: 2.5rem; color: #fff;">Relatório Concluído</h3>
+          <span id="indice-num" style="font-family: 'Space Mono', monospace; font-size: 2rem; color: var(--neon-blue); display: block; margin-bottom: 16px;">0%</span>
+          <p id="resultado-mensagem" style="color:var(--text-muted); line-height: 1.6;"></p>
+          <div id="resultado-recomendacoes" style="margin-top:24px; text-align:left; background:var(--dark-input); border-radius:4px; padding:24px; border: 1px solid rgba(255,255,255,0.05);"></div>
+          <a href="catalogo.html" class="btn btn-primario" style="margin-top:24px;">🛒 Comprar Uma Gambiarra Agora</a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-carrinho" id="modal-carrinho"><div class="modal-header"><h3>[ CART_TERMINAL ]</h3><button class="btn-fechar-modal" id="fechar-carrinho">CLOSE (X)</button></div><div class="carrinho-itens" id="carrinho-itens-lista"></div><div class="modal-footer"><div class="carrinho-total"><span>TOTAL:</span><span id="carrinho-total-valor">R$ 0,00</span></div><button class="btn btn-primario" id="btn-pagar-fake" style="width: 100%;">PAY_NOW</button></div></div>
+  <script src="js/principal.js"></script>
+
+  <script>
+    const form = document.getElementById('formulario-risco');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (validarFormulario()) calcularVergonha();
+    });
+
+    function validarFormulario() {
+      let valido = true;
+      const inputs = [
+        { id: 'nome-aluno', erro: 'erro-nome' },
+        { id: 'nome-materia', erro: 'erro-materia' },
+        { id: 'erros-console', erro: 'erro-console' }
+      ];
+      
+      inputs.forEach(i => {
+        const val = document.getElementById(i.id).value.trim();
+        if(!val) { document.getElementById(i.erro).style.display = 'block'; valido = false; }
+        else document.getElementById(i.erro).style.display = 'none';
+      });
+
+      const humor = document.querySelector('input[name="humor-professor"]:checked');
+      if(!humor) { document.getElementById('erro-humor').style.display = 'block'; valido = false; }
+      else document.getElementById('erro-humor').style.display = 'none';
+
+      return valido;
+    }
+
+    function calcularVergonha() {
+      const nome = document.getElementById('nome-aluno').value.trim();
+      const materia = document.getElementById('nome-materia').value.trim();
+      const humor = document.querySelector('input[name="humor-professor"]:checked').value;
+      const erros = document.getElementById('erros-console').value;
+      const checks = document.querySelectorAll('input[name="situacoes"]:checked');
+
+      let indice = 10;
+      if (humor === 'rigido') indice += 40;
+      else if (humor === 'cafe') indice += 25;
+      else indice += 5;
+
+      const mapaErros = { '0': 0, '1-5': 10, '6-20': 20, '21-50': 35, '50+': 50, 'naosei': 45 };
+      indice += (mapaErros[erros] || 0);
+
+      const pesosCheck = { 'id-duplicado': 15, 'so-important': 10, 'sem-relatorio': 25, 'sem-git': 5, 'so-na-minha-maquina': 20 };
+      checks.forEach(c => indice += (pesosCheck[c.value] || 10));
+
+      indice = Math.min(indice, 99);
+
+      let titulo, mensagem;
+      const divRes = document.getElementById('resultado-vergonha');
+      
+      if (indice < 30) {
+        titulo = 'Situação Relativamente Controlada';
+        mensagem = `Parabéns, ${nome}! Seu risco de passar vergonha em ${materia} é de apenas ${indice}%. Você provavelmente é um alienígena ou mentiu no formulário.`;
+        divRes.style.borderColor = '#4ade80';
+      } else if (indice < 60) {
+        titulo = 'Alerta Amarelo de Vergonha';
+        mensagem = `Atenção, ${nome}! Seu risco de passar vergonha em ${materia} é de ${indice}%. A situação é séria mas sobrevivível. Recomendamos reza.`;
+        divRes.style.borderColor = '#facc15';
+      } else if (indice < 85) {
+        titulo = 'EMERGÊNCIA ACADÊMICA';
+        mensagem = `Atenção ${nome}! Seu risco de passar vergonha na apresentação de ${materia} é de ${indice}%. Não respire perto do PC durante a apresentação.`;
+        divRes.style.borderColor = '#ef4444';
+      } else {
+        titulo = 'CATÁSTROFE IMINENTE';
+        mensagem = `${nome}, temos más notícias. Seu risco chegou a ${indice}%. Sugerimos considerar uma nova carreira. Talvez jardinagem.`;
+        divRes.style.borderColor = '#b91c1c';
+      }
+
+      const recomendacoes = [];
+      if (humor === 'rigido') recomendacoes.push('Ensaie uma expressão de confiança total enquanto explica o código.');
+      if (erros === '50+' || erros === 'naosei') recomendacoes.push('Feche o console antes da apresentação. O que os olhos não veem...');
+      checks.forEach(c => {
+        if (c.value === 'sem-relatorio') recomendacoes.push('Faça o relatório AGORA.');
+        if (c.value === 'id-duplicado') recomendacoes.push('Compre o IF Infinito™ para disfarçar os IDs duplicados.');
+        if (c.value === 'so-important') recomendacoes.push('Diga que o !important é uma "escolha arquitetural".');
+      });
+      if (recomendacoes.length === 0) recomendacoes.push('Sem recomendações. Ou você está bem, ou negou tudo.');
+
+      document.getElementById('resultado-titulo').textContent = titulo;
+      document.getElementById('indice-num').textContent = indice + '%';
+      document.getElementById('resultado-mensagem').textContent = mensagem;
+      
+      document.getElementById('resultado-recomendacoes').innerHTML = 
+        '<strong style="color:var(--neon-blue); font-family:\'Space Mono\';">📋 RECOMENDAÇÕES:</strong>' +
+        '<ul style="margin-top:12px; display:flex; flex-direction:column; gap:8px; list-style:disc; padding-left:20px;">' +
+        recomendacoes.map(r => `<li style="font-size:0.85rem; color:var(--text-muted);">${r}</li>`).join('') + '</ul>';
+
+      divRes.style.display = 'block';
+      divRes.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function resetarFormulario() {
+      form.reset();
+      document.getElementById('resultado-vergonha').style.display = 'none';
+      document.querySelectorAll('.form-erro').forEach(e => e.style.display = 'none');
+    }
+  </script>
+</body>
+</html>

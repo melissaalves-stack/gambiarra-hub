@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo — Gambiarra Hub</title>
+  <link rel="stylesheet" href="css/estilo.css" />
+  <style>
+    .filtros-topo { display: flex; gap: 12px; margin-bottom: 32px; flex-wrap: wrap; align-items: center;}
+    .filtro-btn { background: transparent; border: 1px solid var(--border-subtle); color: var(--text-muted); padding: 8px 16px; font-family: 'Space Mono', monospace; font-size: 0.75rem; cursor: pointer; transition: 0.2s; border-radius: 4px; text-transform: uppercase;}
+    .filtro-btn:hover, .filtro-btn.ativo { border-color: var(--neon-blue); color: var(--neon-blue); background: var(--blue-dim); }
+  </style>
+</head>
+<body>
+  <!-- ===== HEADER ===== -->
+  <header>
+    <div class="header-topo">
+      <a href="index.html" class="logo">
+        <div class="logo-texto">
+          <span class="logo-nome">Gambiarra <span>Hub</span></span>
+        </div>
+      </a>
+      <div class="header-busca">
+        <input type="text" id="busca-catalogo" placeholder="Filtrar produtos do catálogo..." oninput="filtrarProdutos()" />
+        <button class="btn-busca">SEARCH</button>
+      </div>
+      <button class="badge-carrinho">[ CART ] <span class="badge-num" id="badge-carrinho">0</span></button>
+    </div>
+    <nav>
+      <ul class="nav-lista">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="catalogo.html" class="ativo">Catálogo</a></li>
+        <li><a href="formulario.html">Simulador de Risco</a></li>
+        <li><a href="sobre.html">Quem Somos</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" style="padding: 60px 8% 40px !important;">
+      <h1>CATÁLOGO <span class="destaque">COMPLETO</span></h1>
+      <p class="hero-slogan">Todos os produtos disponíveis. Qualidade duvidosa garantida. Entrega emocional inclusa.</p>
+    </section>
+
+    <section class="secao">
+      <!-- ===== FILTROS ===== -->
+      <div class="filtros-topo">
+        <span style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--text-muted);">FILTRAR:</span>
+        <button class="filtro-btn ativo" onclick="setFiltro('todos', this)">Todos</button>
+        <button class="filtro-btn" onclick="setFiltro('logica', this)">Lógica</button>
+        <button class="filtro-btn" onclick="setFiltro('estilo', this)">Estilização</button>
+        <button class="filtro-btn" onclick="setFiltro('comportamento', this)">Comportamento Misterioso</button>
+        <span style="margin-left:auto; font-family: 'Space Mono', monospace; font-size:0.75rem; color:var(--text-muted);" id="contagem-produtos">Exibindo todos os produtos</span>
+      </div>
+
+      <!-- ===== GRID PRODUTOS ===== -->
+      <div class="grid-catalogo" id="grid-produtos">
+        <!-- Card 1: IF Infinito -->
+        <div class="card produto-item" data-categoria="logica" data-nome="if infinito">
+          <div class="card-corpo">
+            <span class="card-categoria">Lógica de Decisão</span>
+            <h3>O IF Infinito™</h3>
+            <p class="card-desc">Estrutura de decisão encadeada com mais de 500 linhas de lógica questionável. Cobre todos os casos de uso imagináveis e alguns impossíveis. Não tente entender. Apenas copie.</p>
+          </div>
+          <div class="card-rodape" style="display: flex; flex-direction: column; gap: 10px;">
+            <a href="produto-if.html" class="btn btn-secundario">Ver Detalhes do Código</a>
+            <button class="btn btn-primario btn-adicionar-carrinho" data-nome="O IF Infinito™">Adicionar (R$ 42,00)</button>
+          </div>
+        </div>
+
+        <!-- Card 2: CSS Força Bruta -->
+        <div class="card produto-item" data-categoria="estilo" data-nome="css !important força bruta">
+          <span class="card-badge">NOVO</span>
+          <div class="card-corpo">
+            <span class="card-categoria">Estilização</span>
+            <h3>CSS Força Bruta™</h3>
+            <p class="card-desc">Estilização 100% baseada em !important. O site fica bonito. Por que fica? Ninguém sabe. A cascata do CSS é apenas uma sugestão aqui.</p>
+          </div>
+          <div class="card-rodape" style="display: flex; flex-direction: column; gap: 10px;">
+            <a href="produto-css.html" class="btn btn-secundario">Ver Detalhes do Código</a>
+            <button class="btn btn-primario btn-adicionar-carrinho" data-nome="CSS Força Bruta™">Adicionar (R$ 69,00)</button>
+          </div>
+        </div>
+
+        <!-- Card 3: JS Fantasma -->
+        <div class="card produto-item" data-categoria="comportamento" data-nome="javascript fantasma js misterioso">
+          <span class="card-badge">MISTERIOSO</span>
+          <div class="card-corpo">
+            <span class="card-categoria">Comportamento Indefinido</span>
+            <h3>JavaScript Fantasma™</h3>
+            <p class="card-desc">Aquele script que ninguém criou conscientemente. Está lá desde 2019. Ninguém toca. Se apagar, o site quebra. Se manter... também pode quebrar.</p>
+          </div>
+          <div class="card-rodape" style="display: flex; flex-direction: column; gap: 10px;">
+            <a href="produto-js.html" class="btn btn-secundario">Ver Detalhes do Código</a>
+            <button class="btn btn-primario btn-adicionar-carrinho" data-nome="JavaScript Fantasma™">Adicionar (R$ 13,37)</button>
+          </div>
+        </div>
+
+        <!-- Card 4: Loop Eterno -->
+        <div class="card produto-item" data-categoria="logica" data-nome="loop eterno while for">
+          <span class="card-badge" style="border-color: #ef4444; color: #ef4444;">PERIGOSO</span>
+          <div class="card-corpo">
+            <span class="card-categoria">Lógica de Repetição</span>
+            <h3>Loop Eterno Controlado™</h3>
+            <p class="card-desc">Um while(true) cuidadosamente monitorado. Vem com um break que pode ou não funcionar dependendo da fase da lua.</p>
+          </div>
+          <div class="card-rodape" style="display: flex; flex-direction: column; gap: 10px;">
+            <a href="produto-loop.html" class="btn btn-secundario">Ver Detalhes do Código</a>
+            <button class="btn btn-primario btn-adicionar-carrinho" data-nome="Loop Eterno Controlado™">Adicionar (R$ 29,99)</button>
+          </div>
+        </div>
+
+        <!-- Card 5: Console.log Diagnóstico -->
+        <div class="card produto-item" data-categoria="comportamento" data-nome="console log debug diagnóstico">
+          <span class="card-badge">CLÁSSICO</span>
+          <div class="card-corpo">
+            <span class="card-categoria">Debug</span>
+            <h3>Console.log Premium™</h3>
+            <p class="card-desc">Sistema de debug de última geração baseado exclusivamente em console.log("aqui") e console.log("funciona?").</p>
+          </div>
+          <div class="card-rodape" style="display: flex; flex-direction: column; gap: 10px;">
+            <a href="produto-console.html" class="btn btn-secundario">Ver Detalhes do Código</a>
+            <button class="btn btn-primario btn-adicionar-carrinho" data-nome="Console.log Premium™">Adicionar (R$ 5,00)</button>
+          </div>
+        </div>
+
+        <!-- Card 6: Variável Global Universal -->
+        <div class="card produto-item" data-categoria="estilo" data-nome="variável global css inline style">
+          <span class="card-badge">POLÊMICO</span>
+          <div class="card-corpo">
+            <span class="card-categoria">Arquitetura</span>
+            <h3>Variável Global Universal™</h3>
+            <p class="card-desc">Coloca tudo em window.dados e acessa de qualquer lugar. Elegante? Não. Funciona? Sim. É seguro? Definitivamente não. Vamos usar? Claro.</p>
+          </div>
+          <div class="card-rodape" style="display: flex; flex-direction: column; gap: 10px;">
+            <a href="produto-global.html" class="btn btn-secundario">Ver Detalhes do Código</a>
+            <button class="btn btn-primario btn-adicionar-carrinho" data-nome="Variável Global Universal™">Adicionar (R$ 80,00)</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Mensagem sem resultados -->
+      <div id="sem-resultados" style="display:none; text-align:center; padding:60px 24px;">
+        <h3 style="color:var(--text-main); font-family: 'Space Mono', monospace;">[404] Nenhum produto encontrado</h3>
+        <p style="color:var(--text-muted); font-size:0.85rem; margin-top:8px;">Tente uma busca diferente ou use a solução universal: apagar tudo e começar do zero.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== MODAL CARRINHO ===== -->
+  <div class="modal-carrinho" id="modal-carrinho"><div class="modal-header"><h3>[ CART_TERMINAL ]</h3><button class="btn-fechar-modal" id="fechar-carrinho">CLOSE (X)</button></div><div class="carrinho-itens" id="carrinho-itens-lista"></div><div class="modal-footer"><div class="carrinho-total"><span>TOTAL:</span><span id="carrinho-total-valor">R$ 0,00</span></div><button class="btn btn-primario" id="btn-pagar-fake" style="width: 100%;">PAY_NOW</button></div></div>
+
+  <footer>
+    <div class="footer-rodape">
+      <p>© 2024 Gambiarra Hub™. Todos os bugs reservados.</p>
+    </div>
+  </footer>
+
+  <script src="js/principal.js"></script>
+  <script>
+    function filtrarProdutos() {
+      const termo = document.getElementById('busca-catalogo').value.toLowerCase();
+      const itens = document.querySelectorAll('.produto-item');
+      let visiveis = 0;
+      itens.forEach(item => {
+        const nome = item.getAttribute('data-nome');
+        if (nome.includes(termo)) {
+          item.style.display = '';
+          visiveis++;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+      document.getElementById('sem-resultados').style.display = visiveis === 0 ? 'block' : 'none';
+      document.getElementById('contagem-produtos').textContent = visiveis === 0 ? 'Nenhum produto' : `Exibindo ${visiveis} produto(s)`;
+    }
+
+    let filtroAtivo = 'todos';
+    function setFiltro(categoria, btnEl) {
+      filtroAtivo = categoria;
+      document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('ativo'));
+      if(btnEl) btnEl.classList.add('ativo');
+      const itens = document.querySelectorAll('.produto-item');
+      let visiveis = 0;
+      itens.forEach(item => {
+        if (categoria === 'todos' || item.getAttribute('data-categoria') === categoria) {
+          item.style.display = '';
+          visiveis++;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+      document.getElementById('sem-resultados').style.display = visiveis === 0 ? 'block' : 'none';
+      document.getElementById('contagem-produtos').textContent = `Exibindo ${visiveis} produto(s)`;
+    }
+  </script>
+</body>
+</html>

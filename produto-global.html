@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Variável Global Universal — Gambiarra Hub</title>
+  <link rel="stylesheet" href="css/estilo.css" />
+  <style>
+    .produto-detalhe { display: flex; gap: 40px; flex-wrap: wrap; margin-top: 20px; }
+    .produto-img { flex: 1; min-width: 300px; background: var(--dark-card); border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; font-size: 6rem; border-radius: 4px; min-height: 400px; }
+    .produto-info { flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 16px; }
+    .preco { font-family: 'Space Mono', monospace; font-size: 2.5rem; color: var(--neon-blue); }
+    .features-lista { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+    .features-lista li { color: var(--text-muted); font-size: 0.9rem; display: flex; align-items: center; gap: 8px; }
+    .features-lista li::before { content: '>'; color: #facc15; font-family: 'Space Mono', monospace; }
+    
+    /* Estilos da Demonstração */
+    .demonstracao { background: #0d1117; padding: 20px; border-radius: 8px; border: 1px solid var(--border-subtle); margin-top: 40px; }
+    .demo-header { display: flex; gap: 8px; margin-bottom: 20px; }
+    .demo-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .demo-painel { display: flex; flex-direction: column; gap: 20px; }
+    .demo-modulos { display: flex; gap: 20px; flex-wrap: wrap; }
+    .modulo-box { flex: 1; border: 1px dashed #30363d; padding: 15px; border-radius: 4px; background: #010409; }
+    .modulo-title { font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px; display: block;}
+    .terminal-output { background: #000; border: 1px solid #30363d; padding: 15px; font-family: 'Space Mono', monospace; font-size: 0.9rem; border-radius: 4px; }
+    .btn-demo { padding: 8px 12px; font-family: 'Space Mono', monospace; cursor: pointer; border: none; border-radius: 4px; font-size: 0.8rem; width: 100%; transition: 0.2s;}
+    .btn-set1 { background: #3b82f6; color: #fff; } .btn-set1:hover { background: #2563eb; }
+    .btn-set2 { background: #8b5cf6; color: #fff; } .btn-set2:hover { background: #7c3aed; }
+    .btn-read { background: #22c55e; color: #000; margin-top: 10px; font-weight: bold;}
+    .syntax-keyword { color: #ff7b72; } .syntax-string { color: #a5d6ff; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-topo">
+      <a href="index.html" class="logo"><div class="logo-texto"><span class="logo-nome">Gambiarra <span>Hub</span></span></div></a>
+      <button class="badge-carrinho">[ CART ] <span class="badge-num" id="badge-carrinho">0</span></button>
+    </div>
+    <nav><ul class="nav-lista"><li><a href="index.html">Início</a></li><li><a href="catalogo.html" class="ativo">Catálogo</a></li><li><a href="formulario.html">Simulador de Risco</a></li><li><a href="sobre.html">Quem Somos</a></li></ul></nav>
+  </header>
+
+  <main>
+    <section class="secao">
+      <div class="breadcrumb" style="margin-bottom: 24px; font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--text-muted);">
+        <a href="catalogo.html" style="color: var(--neon-blue); text-decoration: none;">&lt; VOLTAR AO CATÁLOGO</a>
+      </div>
+
+      <div class="produto-detalhe">
+        <div class="produto-img">🌐</div>
+        <div class="produto-info">
+          <h1 style="font-family: 'Bebas Neue', cursive; font-size: 3.5rem; line-height: 1; color: var(--text-main);">Variável Global Universal™</h1>
+          <p style="color: var(--text-muted); line-height: 1.6;">
+            Ensina de forma traumática por que o encapsulamento existe. Coloque tudo em <code style="color: #facc15; background: rgba(250,204,21,0.1); padding: 2px 6px; border-radius: 4px;">window.dados</code> e assista scripts de terceiros sobrescreverem seu carrinho de compras.
+          </p>
+          <div class="preco">R$ 80,00</div>
+          <ul class="features-lista">
+            <li>Escopo léxico é para os fracos</li>
+            <li>Colisão de nomes perfeitamente garantida</li>
+            <li>Destrói o isolamento de componentes da interface</li>
+          </ul>
+          <div style="margin-top: 24px; display: flex; gap: 16px;">
+            <button class="btn btn-primario btn-adicionar-carrinho" data-nome="Variável Global Universal™" style="flex: 1; font-size: 1.2rem; padding: 16px;">ADICIONAR AO CARRINHO</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- DEMONSTRAÇÃO INTERATIVA -->
+      <div class="demonstracao">
+        <div class="demo-header">
+          <span class="demo-dot" style="background: #ef4444;"></span>
+          <span class="demo-dot" style="background: #facc15;"></span>
+          <span class="demo-dot" style="background: #22c55e;"></span>
+          <span style="color: var(--text-muted); font-family: 'Space Mono', monospace; font-size: 0.8rem; margin-left: 10px;">colisao_estado.js</span>
+        </div>
+        
+        <div class="demo-painel">
+          <p style="color: #c9d1d9; font-size: 0.9rem;">Simulador: Dois scripts diferentes da mesma página tentando usar a mesma variável global para coisas diferentes.</p>
+          
+          <div class="demo-modulos">
+            <div class="modulo-box">
+              <span class="modulo-title">Módulo: Carrinho.js</span>
+              <button id="btn-set-cart" class="btn-demo btn-set1">window.dados = "2 Itens Adicionados"</button>
+            </div>
+            
+            <div class="modulo-box">
+              <span class="modulo-title">Módulo: PluginDeTerceiro.js</span>
+              <button id="btn-set-plugin" class="btn-demo btn-set2">window.dados = "Token_Invalido"</button>
+            </div>
+          </div>
+
+          <div class="terminal-output">
+            <div style="margin-bottom: 15px;">
+              <span style="color: #8b949e;">Estado atual na memória:</span><br>
+              <span class="syntax-keyword">window</span>.dados = <span id="global-val" class="syntax-string" style="color: #8b949e;">undefined</span>;
+            </div>
+            
+            <hr style="border: 0; border-top: 1px dashed #30363d; margin: 15px 0;">
+            
+            <span style="color: #c9d1d9;">Carrinho tentando ler a variável para renderizar a tela:</span>
+            <button id="btn-read-state" class="btn-demo btn-read">Renderizar Carrinho</button>
+            <div id="read-result" style="margin-top: 15px; min-height: 20px;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/principal.js"></script>
+  <script>
+    let simuladorWindowDados = "undefined";
+    const elGlobalVal = document.getElementById('global-val');
+    const elResult = document.getElementById('read-result');
+
+    document.getElementById('btn-set-cart').addEventListener('click', () => {
+      simuladorWindowDados = "2 Itens Adicionados";
+      elGlobalVal.innerText = `"${simuladorWindowDados}"`;
+      elGlobalVal.style.color = "#a5d6ff";
+      elResult.innerText = "";
+    });
+
+    document.getElementById('btn-set-plugin').addEventListener('click', () => {
+      simuladorWindowDados = "Token_Invalido";
+      elGlobalVal.innerText = `"${simuladorWindowDados}"`;
+      elGlobalVal.style.color = "#a5d6ff";
+      elResult.innerText = "";
+    });
+
+    document.getElementById('btn-read-state').addEventListener('click', () => {
+      if(simuladorWindowDados === "2 Itens Adicionados") {
+        elResult.innerHTML = `<span style="color: #4ade80;">[SUCESSO] Interface carregou os itens corretamente.</span>`;
+      } else if (simuladorWindowDados === "undefined") {
+        elResult.innerHTML = `<span style="color: #facc15;">[AVISO] Carrinho vazio. Nenhum dado encontrado.</span>`;
+      } else {
+        elResult.innerHTML = `<span style="color: #ef4444;">[FALHA CRÍTICA] Módulo Carrinho tentou iterar sobre "${simuladorWindowDados}". Site quebrou!</span>`;
+      }
+    });
+  </script>
+</body>
+</html>

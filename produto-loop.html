@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loop Eterno Controlado — Gambiarra Hub</title>
+  <link rel="stylesheet" href="css/estilo.css" />
+  <style>
+    .produto-detalhe { display: flex; gap: 40px; flex-wrap: wrap; margin-top: 20px; }
+    .produto-img { flex: 1; min-width: 300px; background: var(--dark-card); border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; font-size: 6rem; border-radius: 4px; min-height: 400px; }
+    .produto-info { flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 16px; }
+    .preco { font-family: 'Space Mono', monospace; font-size: 2.5rem; color: var(--neon-blue); }
+    .features-lista { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+    .features-lista li { color: var(--text-muted); font-size: 0.9rem; display: flex; align-items: center; gap: 8px; }
+    .features-lista li::before { content: '>'; color: #ef4444; font-family: 'Space Mono', monospace; }
+    
+    /* Estilos da Demonstração */
+    .demonstracao { background: #0d1117; padding: 20px; border-radius: 8px; border: 1px solid var(--border-subtle); margin-top: 40px; }
+    .demo-header { display: flex; gap: 8px; margin-bottom: 20px; }
+    .demo-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .demo-painel { display: flex; gap: 20px; flex-wrap: wrap; }
+    .demo-codigo { flex: 1; min-width: 300px; overflow-x: auto; font-family: 'Space Mono', monospace; font-size: 0.9rem; color: #c9d1d9; line-height: 1.5; }
+    .demo-interacao { flex: 1; min-width: 300px; background: #000; padding: 20px; border-radius: 4px; border: 1px solid #30363d; display: flex; flex-direction: column; gap: 16px; }
+    .terminal-output { flex-grow: 1; font-family: 'Space Mono', monospace; color: #4ade80; font-size: 0.85rem; overflow-y: auto; max-height: 150px; white-space: pre-wrap; }
+    .btn-demo { padding: 8px 16px; font-family: 'Space Mono', monospace; cursor: pointer; border: none; border-radius: 4px; font-weight: bold; }
+    .btn-exec { background: #22c55e; color: #000; }
+    .btn-exec:disabled { background: #166534; cursor: not-allowed; }
+    .btn-break { background: #ef4444; color: #fff; }
+    .btn-break:disabled { background: #7f1d1d; color: #ccc; cursor: not-allowed; }
+    .syntax-keyword { color: #ff7b72; } .syntax-string { color: #a5d6ff; } .syntax-comment { color: #8b949e; font-style: italic; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-topo">
+      <a href="index.html" class="logo"><div class="logo-texto"><span class="logo-nome">Gambiarra <span>Hub</span></span></div></a>
+      <button class="badge-carrinho">[ CART ] <span class="badge-num" id="badge-carrinho">0</span></button>
+    </div>
+    <nav><ul class="nav-lista"><li><a href="index.html">Início</a></li><li><a href="catalogo.html" class="ativo">Catálogo</a></li><li><a href="formulario.html">Simulador de Risco</a></li><li><a href="sobre.html">Quem Somos</a></li></ul></nav>
+  </header>
+
+  <main>
+    <section class="secao">
+      <div class="breadcrumb" style="margin-bottom: 24px; font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--text-muted);">
+        <a href="catalogo.html" style="color: var(--neon-blue); text-decoration: none;">&lt; VOLTAR AO CATÁLOGO</a>
+      </div>
+
+      <div class="produto-detalhe">
+        <div class="produto-img">🔁</div>
+        <div class="produto-info">
+          <h1 style="font-family: 'Bebas Neue', cursive; font-size: 3.5rem; line-height: 1; color: var(--text-main);">Loop Eterno Controlado™</h1>
+          <p style="color: var(--text-muted); line-height: 1.6;">
+            Um <code style="color: #ef4444; background: rgba(239,68,68,0.1); padding: 2px 6px; border-radius: 4px;">while(true)</code> cuidadosamente monitorado. Ensina a dura lição de que sem uma condição de parada clara, a thread principal é sequestrada e o usuário chora.
+          </p>
+          <div class="preco">R$ 29,99</div>
+          <ul class="features-lista">
+            <li>Garante 100% de uso da CPU do usuário</li>
+            <li>Aumenta a rotação das ventoinhas instantaneamente</li>
+            <li>Trava a interface gráfica com maestria</li>
+          </ul>
+          <div style="margin-top: 24px; display: flex; gap: 16px;">
+            <button class="btn btn-primario btn-adicionar-carrinho" data-nome="Loop Eterno Controlado™" style="flex: 1; font-size: 1.2rem; padding: 16px;">ADICIONAR AO CARRINHO</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- DEMONSTRAÇÃO INTERATIVA -->
+      <div class="demonstracao">
+        <div class="demo-header">
+          <span class="demo-dot" style="background: #ef4444;"></span>
+          <span class="demo-dot" style="background: #facc15;"></span>
+          <span class="demo-dot" style="background: #22c55e;"></span>
+          <span style="color: var(--text-muted); font-family: 'Space Mono', monospace; font-size: 0.8rem; margin-left: 10px;">lab_interativo.js</span>
+        </div>
+        
+        <div class="demo-painel">
+          <div class="demo-codigo">
+<pre><code><span class="syntax-keyword">let</span> usoCPU = 1;
+<span class="syntax-keyword">let</span> rodando = <span class="syntax-keyword">true</span>;
+
+<span class="syntax-keyword">while</span> (rodando) {
+  <span class="syntax-comment">// O navegador tenta respirar...</span>
+  processarDados();
+  usoCPU = 100;
+  
+  <span class="syntax-comment">// Condição de parada falha</span>
+  <span class="syntax-keyword">if</span> (Math.random() > 0.95) {
+    <span class="syntax-keyword">break</span>; <span class="syntax-comment">// Quase nunca cai aqui</span>
+  }
+}</code></pre>
+          </div>
+          
+          <div class="demo-interacao">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="color: #fff; font-family: 'Space Mono', monospace;">Uso de CPU: <span id="cpu-display" style="color: #22c55e;">1%</span></span>
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <button id="btn-start-loop" class="btn-demo btn-exec">Iniciar while(true)</button>
+              <button id="btn-stop-loop" class="btn-demo btn-break" disabled>Tentar Break</button>
+            </div>
+            <div class="terminal-output" id="loop-terminal">
+> Sistema ocioso. Aguardando execução do script...
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/principal.js"></script>
+  <script>
+    const btnStart = document.getElementById('btn-start-loop');
+    const btnStop = document.getElementById('btn-stop-loop');
+    const terminal = document.getElementById('loop-terminal');
+    const cpuDisplay = document.getElementById('cpu-display');
+    let loopInterval;
+    let iteracoes = 0;
+
+    btnStart.addEventListener('click', () => {
+      btnStart.disabled = true;
+      btnStop.disabled = false;
+      iteracoes = 0;
+      cpuDisplay.style.color = '#ef4444';
+      terminal.innerHTML = "> ATENÇÃO: Loop iniciado. Thread principal em risco...\n";
+      
+      loopInterval = setInterval(() => {
+        iteracoes += 4829;
+        cpuDisplay.innerText = Math.min(100, Math.floor(Math.random() * 5 + 95)) + '%';
+        terminal.innerHTML += `Iteração ${iteracoes}: Buscando condição de parada... FAILED\n`;
+        terminal.scrollTop = terminal.scrollHeight;
+      }, 100);
+    });
+
+    btnStop.addEventListener('click', () => {
+      // Simula a falha do break
+      if (Math.random() > 0.4) {
+        clearInterval(loopInterval);
+        cpuDisplay.style.color = '#22c55e';
+        cpuDisplay.innerText = '2%';
+        terminal.innerHTML += `\n> SUCESSO: O break funcionou na iteração ${iteracoes}. Navegador sobreviveu.\n`;
+        terminal.scrollTop = terminal.scrollHeight;
+        btnStart.disabled = false;
+        btnStop.disabled = true;
+      } else {
+        terminal.innerHTML += `\n> ERRO: Sinal de interrupção ignorado! O loop se recusa a parar.\n`;
+        terminal.scrollTop = terminal.scrollHeight;
+      }
+    });
+  </script>
+</body>
+</html>

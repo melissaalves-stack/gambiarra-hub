@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quem Somos — Gambiarra Hub</title>
+  <link rel="stylesheet" href="css/estilo.css" />
+  <style>
+    .suporte-area { position: relative; height: 300px; background: var(--dark-input); border: 1px dashed var(--border-subtle); border-radius: 4px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-top: 24px; }
+    .btn-fugitivo { position: relative; transition: left 0.1s, top 0.1s; z-index: 10; white-space: nowrap; }
+    .status-suporte { font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--text-muted); position: absolute; bottom: 16px; left: 16px; pointer-events: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-topo"><a href="index.html" class="logo"><div class="logo-texto"><span class="logo-nome">Gambiarra <span>Hub</span></span></div></a><button class="badge-carrinho">[ CART ] <span class="badge-num" id="badge-carrinho">0</span></button></div>
+    <nav><ul class="nav-lista"><li><a href="index.html">Início</a></li><li><a href="catalogo.html">Catálogo</a></li><li><a href="sobre.html" class="ativo">Quem Somos</a></li></ul></nav>
+  </header>
+
+  <main>
+    <section class="hero" style="padding: 60px 8% 40px !important;">
+      <h1>Nossa <span class="destaque">Equipa</span></h1>
+      <p class="hero-slogan">Desenvolvedores exaustos, motivados apenas por café e prazos impossíveis.</p>
+    </section>
+
+    <section class="secao">
+      <h2 class="secao-titulo">Fale com o Suporte</h2>
+      <p class="secao-sub">Temos uma equipa pronta para ignorar o seu e-mail.</p>
+      
+      <div class="suporte-area" id="suporte-wrapper">
+        <span class="status-suporte" id="status-suporte">Aproxime o rato para solicitar suporte...</span>
+        <button class="btn btn-primario btn-fugitivo" id="btn-suporte">🎧 Clicar para Suporte</button>
+        <p id="msg-capturado" style="display: none; color: #4ade80; font-family: 'Space Mono'; position: absolute; text-align: center; padding: 20px;"></p>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-carrinho" id="modal-carrinho"><div class="modal-header"><h3>[ CART_TERMINAL ]</h3><button class="btn-fechar-modal" id="fechar-carrinho">CLOSE (X)</button></div><div class="carrinho-itens" id="carrinho-itens-lista"></div><div class="modal-footer"><div class="carrinho-total"><span>TOTAL:</span><span id="carrinho-total-valor">R$ 0,00</span></div><button class="btn btn-primario" id="btn-pagar-fake" style="width: 100%;">PAY_NOW</button></div></div>
+  
+  <script src="js/principal.js"></script>
+  <script>
+    // O SEU BOTÃO FUGITIVO ORIGINAL RESTAURADO
+    const btnSuporte = document.getElementById('btn-suporte');
+    const wrapper = document.getElementById('suporte-wrapper');
+    const statusTxt = document.getElementById('status-suporte');
+    const msgCapturado = document.getElementById('msg-capturado');
+    
+    let tentativas = 0;
+    let capturado = false;
+    
+    const frasesFuga = [
+      "Ope, escorregou!",
+      "Nossos atendentes estão ocupados.",
+      "Tente novamente mais tarde.",
+      "Você não precisa de suporte.",
+      "Foi erro seu, não nosso.",
+      "Já tentou limpar o cache?",
+      "Funciona na nossa máquina.",
+      "Estamos em horário de almoço."
+    ];
+
+    btnSuporte.addEventListener('mouseover', () => {
+      if(capturado) return;
+      tentativas++;
+      
+      const wrapperRect = wrapper.getBoundingClientRect();
+      const btnRect = btnSuporte.getBoundingClientRect();
+      
+      const maxX = wrapperRect.width - btnRect.width - 40;
+      const maxY = wrapperRect.height - btnRect.height - 40;
+      
+      const novoX = Math.random() * maxX;
+      const novoY = Math.random() * maxY;
+      
+      btnSuporte.style.position = 'absolute';
+      btnSuporte.style.left = novoX + 'px';
+      btnSuporte.style.top = novoY + 'px';
+      
+      statusTxt.textContent = frasesFuga[(tentativas - 1) % frasesFuga.length];
+
+      if(tentativas >= 10) {
+        capturado = true;
+        btnSuporte.style.position = 'static';
+        btnSuporte.textContent = '✅ Capturado! Abrindo ticket...';
+        btnSuporte.style.borderColor = '#4ade80';
+        btnSuporte.style.color = '#4ade80';
+        
+        statusTxt.textContent = 'Ticket aberto! Tempo de resposta estimado: 3 a 5 anos úteis.';
+        msgCapturado.style.display = 'block';
+        msgCapturado.textContent = `🎉 Parabéns! Você perseverou por ${tentativas} tentativas. Ticket #${Math.floor(Math.random()*99999)} criado. A nossa equipa entrará em contacto em breve (definição de "breve" pode variar).`;
+      }
+    });
+  </script>
+</body>
+</html>

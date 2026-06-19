@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CSS Força Bruta™ — Gambiarra Hub</title>
+  <link rel="stylesheet" href="css/estilo.css" />
+  <style>
+    .produto-detalhe { display: flex; gap: 32px; flex-wrap: wrap; margin-top: 20px; align-items: flex-start;}
+    .produto-img { width: 120px; height: 120px; background: var(--dark-card); border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; font-size: 4rem; border-radius: 8px; flex-shrink: 0; }
+    .produto-info { flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 16px; }
+    .preco { font-family: 'Space Mono', monospace; font-size: 2rem; color: var(--neon-blue); }
+    
+    /* O SEU CSS DO SITE FALSO */
+    .preview-site { background: white; border-radius: 8px; overflow: hidden; border: 2px solid rgba(0, 194, 255, 0.3); transition: all 0.5s ease; max-width: 480px; margin: 24px 0; }
+    .preview-barra { background: #e5e7eb; padding: 8px 12px; display: flex; gap: 6px; }
+    .preview-dot { width: 10px; height: 10px; border-radius: 50%; background: #9ca3af; }
+    .preview-conteudo { padding: 20px; font-family: Arial, sans-serif; transition: all 0.5s ease; background: #f9fafb; color: #111827;}
+    .preview-nav-fake { background: #2563eb; padding: 12px; color: white; font-weight: bold; border-radius: 4px; margin-bottom: 16px; transition: all 0.5s ease;}
+    .site-quebrado .preview-conteudo { filter: blur(2px) hue-rotate(180deg); }
+    .site-quebrado .preview-nav-fake { transform: rotate(-3deg) translateX(20px); background: #7c3aed !important; }
+    .site-borrado .preview-conteudo { filter: blur(8px); }
+    .site-girado { transform: rotate(45deg) scale(0.6); }
+    .terminal-logs { background: #060608; padding: 16px; font-family: 'Space Mono', monospace; font-size: 0.75rem; border: 1px solid rgba(255,255,255,0.05); border-radius: 4px; height: 120px; overflow-y: auto; margin-top: 16px;}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-topo"><a href="index.html" class="logo"><div class="logo-texto"><span class="logo-nome">Gambiarra <span>Hub</span></span></div></a><button class="badge-carrinho">[ CART ] <span class="badge-num" id="badge-carrinho">0</span></button></div>
+    <nav><ul class="nav-lista"><li><a href="index.html">Início</a></li><li><a href="catalogo.html" class="ativo">Catálogo</a></li><li><a href="formulario.html">Simulador de Risco</a></li></ul></nav>
+  </header>
+
+  <main>
+    <section class="secao">
+      <div class="breadcrumb" style="margin-bottom: 24px; font-family: 'Space Mono', monospace; font-size: 0.8rem;"><a href="catalogo.html" style="color: var(--neon-blue);">← VOLTAR AO CATÁLOGO</a></div>
+
+      <div class="produto-detalhe">
+        <div class="produto-img">💪</div>
+        <div class="produto-info">
+          <span class="card-badge" style="width: fit-content;">ESTILIZAÇÃO</span>
+          <h1 style="font-family: 'Bebas Neue', cursive; font-size: 3rem; line-height: 1;">CSS Força Bruta™</h1>
+          <p style="color: var(--text-muted); line-height: 1.6;">O CSS Força Bruta™ resolve qualquer conflito de estilo com uma única estratégia: colocar <code style="color:var(--neon-blue);">!important</code> em absolutamente tudo. A cascata do CSS é apenas uma sugestão.</p>
+          <div class="preco">R$ 69,00</div>
+          <button class="btn btn-primario btn-adicionar-carrinho" data-nome="CSS Força Bruta™" style="max-width: 300px; padding: 16px;">ADICIONAR AO CARRINHO</button>
+        </div>
+      </div>
+
+      <div class="area-interativa" style="background: var(--dark-card); padding: 24px; border-radius: 8px; margin-top: 40px; border: 1px solid var(--border-subtle);">
+        <h3 style="color: var(--neon-blue); font-family: 'Space Mono'; margin-bottom: 16px;">// DEMONSTRAÇÃO AO VIVO</h3>
+        <p style="color: var(--text-muted); font-size: 0.85rem;">Clique nos botões para ver o que acontece quando o CSS Força Bruta™ entra em ação (ou quando ele falha).</p>
+
+        <div class="preview-site" id="preview-alvo">
+          <div class="preview-barra"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div>
+          <div class="preview-conteudo">
+            <div class="preview-nav-fake">Meu Site Lindo</div>
+            <h2 style="margin-bottom: 8px;">Bem-vindo!</h2>
+            <p style="font-size: 0.9rem; line-height: 1.5;">Este é um layout frágil. Qualquer CSS externo pode destruí-lo. Por favor, não use !important.</p>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <button class="btn btn-secundario" onclick="quebrarSite()">💥 Injetar CSS Externo</button>
+          <button class="btn btn-secundario" onclick="aplicarBlur()">🌫️ Injetar Blur</button>
+          <button class="btn btn-secundario" onclick="girarSite()">🌀 Girar Layout</button>
+          <button class="btn btn-primario" onclick="restaurarSite()">✅ Aplicar !important (Restaurar)</button>
+        </div>
+
+        <div class="terminal-logs" id="terminal-css">
+          <span style="color: #5a5a6e; display: block; margin-bottom: 4px;">> Aguardando comandos CSS...</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-carrinho" id="modal-carrinho"><div class="modal-header"><h3>[ CART_TERMINAL ]</h3><button class="btn-fechar-modal" id="fechar-carrinho">CLOSE (X)</button></div><div class="carrinho-itens" id="carrinho-itens-lista"></div><div class="modal-footer"><div class="carrinho-total"><span>TOTAL:</span><span id="carrinho-total-valor">R$ 0,00</span></div><button class="btn btn-primario" id="btn-pagar-fake" style="width: 100%;">PAY_NOW</button></div></div>
+  
+  <script src="js/principal.js"></script>
+  <script>
+    const preview = document.getElementById('preview-alvo');
+    const terminal = document.getElementById('terminal-css');
+
+    function log(texto, cor) {
+      terminal.innerHTML += `<span style="color: ${cor}; display: block; margin-bottom: 4px;">> ${texto}</span>`;
+      terminal.scrollTop = terminal.scrollHeight;
+    }
+
+    function quebrarSite() {
+      preview.className = 'preview-site site-quebrado';
+      log('Conflito de especificidade! O layout foi destruído.', '#ef4444');
+    }
+
+    function aplicarBlur() {
+      preview.className = 'preview-site site-borrado';
+      log('Aplicando blur... como a visão às 3am codando', '#facc15');
+    }
+
+    function girarSite() {
+      preview.className = 'preview-site site-girado';
+      log('Site girado 45°. Técnica usada por 0% dos devs sérios.', '#c084fc');
+    }
+
+    function restaurarSite() {
+      preview.className = 'preview-site';
+      log('!important reinserido em todos os elementos', '#4ade80');
+      log('Estabilidade gambiarrística restaurada ✓', '#4ade80');
+    }
+  </script>
+</body>
+</html>
