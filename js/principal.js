@@ -46,6 +46,12 @@ function tentarExcluir() {
     alert(msg);
 }
 
+const mensagensExclusao = [
+    '❌ ERRO 403: Excluir? Você nem sabe o que é um ponteiro!',
+    '🚫 Operação negada. O item já tem apego emocional a você.',
+    '💀 Fatal error: excluir.exe parou de funcionar. Talvez seja melhor comprar mesmo.',
+];
+
 document.addEventListener('DOMContentLoaded', () => {
     const badgeCarrinho = document.querySelector('.badge-carrinho');
     const modal = document.getElementById('modal-carrinho');
@@ -81,12 +87,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     atualizarCarrinho();
 });
-
-const mensagensExclusao = [
-    '❌ ERRO 403: Excluir? Você nem sabe o que é um ponteiro!',
-    '🚫 Operação negada. O item já tem apego emocional a você.',
-    '💀 Fatal error: excluir.exe parou de funcionar. Talvez seja melhor comprar mesmo.',
-];
 
 function realizarBusca() {
   const input = document.getElementById('busca-input');
