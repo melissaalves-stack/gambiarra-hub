@@ -51,6 +51,17 @@ document.addEventListener('DOMContentLoaded', () => {
         btnFechar.addEventListener('click', () => modal.classList.remove('aberto'));
     }
 
+    // "Excluir" produto do carrinho — só na teoria. Na prática, ninguém sai daqui sem pagar.
+    const listaItens = document.getElementById('carrinho-itens-lista');
+    if (listaItens) {
+        listaItens.addEventListener('click', (e) => {
+            const btn = e.target.closest('.btn-excluir-item');
+            if (!btn) return;
+            e.preventDefault();
+            alert('Não é possível remover este item. Finalize a compra para continuar.');
+        });
+    }
+    
     document.querySelectorAll('.btn-adicionar-carrinho').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
