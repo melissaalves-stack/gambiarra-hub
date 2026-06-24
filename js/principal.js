@@ -41,6 +41,11 @@ function atualizarCarrinho() {
     totalValor.textContent = `R$ ${total.toFixed(2)}`;
 }
 
+function tentarExcluir() {
+    const msg = mensagensExclusao[Math.floor(Math.random() * mensagensExclusao.length)];
+    alert(msg);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const badgeCarrinho = document.querySelector('.badge-carrinho');
     const modal = document.getElementById('modal-carrinho');
@@ -82,12 +87,6 @@ const mensagensExclusao = [
     '🚫 Operação negada. O item já tem apego emocional a você.',
     '💀 Fatal error: excluir.exe parou de funcionar. Talvez seja melhor comprar mesmo.',
 ];
-
-function tentarExcluir() {
-    const msg = mensagensExclusao[Math.floor(Math.random() * mensagensExclusao.length)];
-    alert(msg);
-}
-
 
 function realizarBusca() {
   const input = document.getElementById('busca-input');
