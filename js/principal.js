@@ -18,10 +18,10 @@ function atualizarCarrinho() {
     const totalValor = document.getElementById('carrinho-total-valor');
 
     if(!badgeNum || !listaItens) return;
-    
+   
     badgeNum.textContent = carrinho.length;
     listaItens.innerHTML = '';
-    
+   
     if (carrinho.length === 0) {
         listaItens.innerHTML = `<p style="font-family:'Space Mono', monospace; color:#5a5a6e; font-size:0.8rem; text-align:center; margin-top:40px;">CARRINHO_VAZIO</p>`;
         totalValor.textContent = 'R$ 0,00';
@@ -35,6 +35,7 @@ function atualizarCarrinho() {
             <div class="carrinho-item">
                 <span class="carrinho-item-nome">${item.nome}</span>
                 <span class="carrinho-item-preco">R$ ${item.preco.toFixed(2)}</span>
+                <button class="btn-excluir-item" onclick="tentarExcluir()">[ DEL ]</button>
             </div>`;
     });
     totalValor.textContent = `R$ ${total.toFixed(2)}`;
@@ -51,17 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
         btnFechar.addEventListener('click', () => modal.classList.remove('aberto'));
     }
 
-    // "Excluir" produto do carrinho — só na teoria. Na prática, ninguém sai daqui sem pagar.
-    const listaItens = document.getElementById('carrinho-itens-lista');
-    if (listaItens) {
-        listaItens.addEventListener('click', (e) => {
-            const btn = e.target.closest('.btn-excluir-item');
-            if (!btn) return;
-            e.preventDefault();
-            alert('Não é possível remover este item. Finalize a compra para continuar.');
-        });
-    }
-    
     document.querySelectorAll('.btn-adicionar-carrinho').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -87,7 +77,18 @@ document.addEventListener('DOMContentLoaded', () => {
     atualizarCarrinho();
 });
 
-// === 2. Busca do Index (Sua lógica original do ZIP) ===
+const mensagensExclusao = [
+    '❌ ERRO 403: Excluir? Você nem sabe o que é um ponteiro!',
+    '🚫 Operação negada. O item já tem apego emocional a você.',
+    '💀 Fatal error: excluir.exe parou de funcionar. Talvez seja melhor comprar mesmo.',
+];
+
+function tentarExcluir() {
+    const msg = mensagensExclusao[Math.floor(Math.random() * mensagensExclusao.length)];
+    alert(msg);
+}
+
+
 function realizarBusca() {
   const input = document.getElementById('busca-input');
   if (!input) return;
