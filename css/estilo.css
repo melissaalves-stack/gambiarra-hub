@@ -96,15 +96,11 @@ nav { margin-top: 20px; }
 .btn-fechar-modal { background: transparent; border: none; color: var(--text-muted); cursor: pointer; font-family: 'Space Mono', monospace; font-size: 0.8rem; }
 .btn-fechar-modal:hover { color: var(--neon-blue); }
 .carrinho-itens { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
-.carrinho-item { display: flex; justify-content: space-between; align-items: center; background: var(--dark-card); padding: 16px; border: 1px solid rgba(255,255,255,0.02); gap: 12px; }
+.carrinho-item { display: flex; justify-content: space-between; align-items: center; background: var(--dark-card); padding: 16px; border: 1px solid rgba(255,255,255,0.02); }
 .carrinho-item-nome { font-family: 'Space Mono', monospace; font-size: 0.85rem; color: #fff; }
 .carrinho-item-preco { font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--neon-blue); }
-.btn-excluir-item { background: transparent; border: 1px solid rgba(255,46,99,0.3); color: #ff2e63; width: 26px; height: 26px; line-height: 1; border-radius: 4px; cursor: pointer; font-family: 'Space Mono', monospace; flex-shrink: 0; transition: all 0.15s ease; }
-.btn-excluir-item:hover { background: rgba(255,46,99,0.12); border-color: #ff2e63; }
-
-.carrinho-erro { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: #ff2e63; background: rgba(255,46,99,0.08); border: 1px solid rgba(255,46,99,0.35); padding: 0; max-height: 0; overflow: hidden; opacity: 0; margin: 0; transition: max-height 0.25s ease, opacity 0.25s ease, padding 0.25s ease, margin 0.25s ease; }
-.carrinho-erro.show { max-height: 80px; opacity: 1; padding: 12px; margin-bottom: 16px; animation: shake-erro 0.4s ease; }
-@keyframes shake-erro { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+.btn-excluir-item { background: transparent; border: 1px solid #ff4d4d; color: #ff4d4d; font-family: 'Space Mono', monospace; font-size: 0.7rem; padding: 4px 8px; cursor: pointer; border-radius: 2px; margin-left: 10px; transition: background 0.2s, color 0.2s; }
+.btn-excluir-item:hover { background: #ff4d4d; color: #0d0d14; }
 .modal-footer { margin-top: 24px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 24px; }
 .carrinho-total { display: flex; justify-content: space-between; font-family: 'Space Mono', monospace; font-size: 1rem; margin-bottom: 24px; color: #fff; }
 
